@@ -98,6 +98,99 @@ AOS.init({
     offset: 200
 });
 
+// Chat Assistant Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const chatToggle = document.querySelector('.chat-toggle');
+    const chatContainer = document.querySelector('.chat-container');
+    const closeChat = document.querySelector('.close-chat');
+    const chatInput = document.querySelector('.chat-input input');
+    const sendMessage = document.querySelector('.send-message');
+    const chatMessages = document.querySelector('.chat-messages');
+    const quickActions = document.querySelectorAll('.action-btn');
+
+    // Toggle chat container
+    chatToggle.addEventListener('click', () => {
+        chatContainer.classList.toggle('active');
+        if (chatContainer.classList.contains('active')) {
+            chatInput.focus();
+        }
+    });
+
+    closeChat.addEventListener('click', () => {
+        chatContainer.classList.remove('active');
+    });
+
+    // Send message function
+    function sendUserMessage(message) {
+        if (!message.trim()) return;
+
+        // Add user message
+        const userMessageHTML = `
+            <div class="message user">
+                <div class="message-content">
+                    <p>${message}</p>
+                </div>
+            </div>
+        `;
+        chatMessages.insertAdjacentHTML('beforeend', userMessageHTML);
+
+        // Clear input
+        chatInput.value = '';
+
+        // Simulate bot response
+        setTimeout(() => {
+            const botResponse = getBotResponse(message);
+            const botMessageHTML = `
+                <div class="message bot">
+                    <div class="message-content">
+                        <p>${botResponse}</p>
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', botMessageHTML);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+    }
+
+    // Simple bot response logic
+    function getBotResponse(message) {
+        message = message.toLowerCase();
+        
+        if (message.includes('experience') || message.includes('work')) {
+            return "Sravan is currently working as an SDE-II at Micron Technology, specializing in Gen AI and Full Stack Development. He has 3.6 years of experience in developing AI-powered applications.";
+        } else if (message.includes('skills') || message.includes('technology')) {
+            return "Sravan's key skills include Azure OpenAI, Semantic Kernel, RAG, Angular, .NET Core, and various cloud technologies. He's particularly strong in AI integration and full-stack development.";
+        } else if (message.includes('project')) {
+            return "Check out Sravan's latest project - an AI Chat Assistant using Azure OpenAI and Semantic Kernel. He's also developed a MACD application that improved production efficiency by 30%.";
+        } else if (message.includes('contact') || message.includes('reach')) {
+            return "You can reach Sravan through his Topmate profile for professional discussions, or connect with him on LinkedIn. Would you like me to share the links?";
+        } else if (message.includes('certification') || message.includes('qualified')) {
+            return "Sravan holds several professional certifications including Microsoft Azure Fundamentals (AZ-900), Azure AI Fundamentals (AI-900), and AWS AI Practitioner certification.";
+        } else {
+            return "I'd be happy to tell you more about Sravan's experience, skills, or projects. What would you like to know?";
+        }
+    }
+
+    // Send message on button click or enter key
+    sendMessage.addEventListener('click', () => {
+        sendUserMessage(chatInput.value);
+    });
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendUserMessage(chatInput.value);
+        }
+    });
+
+    // Quick action buttons
+    quickActions.forEach(button => {
+        button.addEventListener('click', () => {
+            const query = button.getAttribute('data-query');
+            sendUserMessage(query);
+        });
+    });
+});
+
 // Particle.js Configuration
 particlesJS('particles-js', {
     particles: {

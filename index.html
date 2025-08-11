@@ -499,6 +499,40 @@ public class LotsController : ControllerBase
         <a href="https://topmate.io/sravan_arimadla10" class="btn contact-btn">Get in Touch</a>
     </section>
 
+    <!-- Chat Assistant -->
+    <div class="chat-assistant">
+        <button class="chat-toggle" aria-label="Toggle chat">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3><i class="fas fa-robot"></i> Portfolio Assistant</h3>
+                <button class="close-chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages">
+                <div class="message bot">
+                    <div class="message-content">
+                        <p>👋 Hi! I'm Sravan's portfolio assistant. How can I help you today?</p>
+                        <div class="quick-actions">
+                            <button class="action-btn" data-query="Tell me about Sravan's experience">Experience</button>
+                            <button class="action-btn" data-query="What are Sravan's key skills">Skills</button>
+                            <button class="action-btn" data-query="Show me Sravan's projects">Projects</button>
+                            <button class="action-btn" data-query="How can I contact Sravan">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." aria-label="Chat message">
+                <button class="send-message" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>

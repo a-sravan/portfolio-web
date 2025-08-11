@@ -99,7 +99,41 @@ AOS.init({
 });
 
 // Chat Assistant Functionality
-document.addEventListener('DOMContentLoaded', () => {
+// Theme Management
+function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    // Update theme toggle icon
+    const themeToggle = document.querySelector('.theme-toggle i');
+    if (themeToggle) {
+        themeToggle.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+}
+
+// Check for saved theme preference or system preference
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme
+    initializeTheme();
+    
+    // Theme toggle functionality
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+    }
     const chatToggle = document.querySelector('.chat-toggle');
     const chatContainer = document.querySelector('.chat-container');
     const closeChat = document.querySelector('.close-chat');

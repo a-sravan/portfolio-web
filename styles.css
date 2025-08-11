@@ -1,5 +1,36 @@
 /* Base Styles */
 :root {
+    /* Dark Theme Variables */
+    --bg-primary: #0f172a;
+    --bg-secondary: #020617;
+    --bg-tertiary: #1e293b;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent-primary: #06b6d4;
+    --accent-secondary: #d946ef;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --nav-bg: rgba(15, 23, 42, 0.95);
+    --timeline-line: #334155;
+    --tag-bg: #1e293b;
+}
+
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #6b7a8e;
+    --text-secondary: #475569;
+    --accent-primary: #0284c7;
+    --accent-secondary: #7c3aed;
+    --card-bg: #f1f5f9;
+    --card-border: #e2e8f0;
+    --nav-bg: rgba(15, 23, 42, 0.9);
+    --timeline-line: #94a3b8;
+    --tag-bg: #e2e8f0;
+}
+
+/* Base styles */
     --bg-primary: #0f172a;
     --bg-secondary: #020617;
     --accent-primary: #06b6d4;

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sravan Arimadla | Senior Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <canvas id="neural-network"></canvas>
+    <div class="cursor-light"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">Sravan Arimadla</div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="gradient-text">Senior Software Engineer</h1>
+        <h2>Gen AI .NET Full-Stack Developer</h2>
+        <p class="hero-summary">I am a professional Software Engineer with 3.6 years of experience passionate about full stack development technologies. Specialized in leveraging Generative AI, LLMs, RAG and prompt engineering to transform business needs into cutting-edge AI solutions.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/sravan-arimadla/" target="_blank" class="btn">LinkedIn</a>
+            <a href="https://github.com/a-sravan" target="_blank" class="btn">GitHub</a>
+        </div>
+    </section>
+
+    <!-- Career Journey Section -->
+    <section id="career-journey" class="career-journey" data-aos="fade-up">
+        <h2 class="section-title">My Career Journey</h2>
+        <div class="journey-container">
+            <div class="journey-path">
+                <div class="milestone" data-aos="fade-up">
+                    <div class="milestone-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="milestone-content">
+                        <h3>Schooling</h3>
+                        <p>Sri Saraswathi Shishu Mandir</p>
+                        <span class="grade">Grade: 9.2</span>
+                    </div>
+                    <div class="milestone-year">2015</div>
+                </div>
+
+                <div class="milestone" data-aos="fade-up" data-aos-delay="100">
+                    <div class="milestone-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="milestone-content">
+                        <h3>Diploma</h3>
+                        <p>Singareni Collieries Polytechnic</p>
+                        <span class="grade">Grade: 95%</span>
+                    </div>
+                    <div class="milestone-year">2018</div>
+                </div>
+
+                <div class="milestone" data-aos="fade-up" data-aos-delay="200">
+                    <div class="milestone-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="milestone-content">
+                        <h3>B.Tech</h3>
+                        <p>KITS Warangal</p>
+                        <span class="grade">Grade: 9.17</span>
+                    </div>
+                    <div class="milestone-year">2022</div>
+                </div>
+
+                <div class="milestone" data-aos="fade-up" data-aos-delay="300">
+                    <div class="milestone-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="milestone-content">
+                        <h3>Full Stack Intern</h3>
+                        <p>Wipro</p>
+                        <span class="achievement">Led 5-member team</span>
+                    </div>
+                    <div class="milestone-year">2022</div>
+                </div>
+
+                <div class="milestone active" data-aos="fade-up" data-aos-delay="400">
+                    <div class="milestone-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="milestone-content">
+                        <h3>SDE-II</h3>
+                        <p>Micron Technology</p>
+                        <span class="achievement">Gen AI & Full Stack</span>
+                    </div>
+                    <div class="milestone-year">Present</div>
+                </div>
+            </div>
+            <div class="journey-line"></div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience" data-aos="fade-up">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-progress"></div>
+            <div class="timeline-item active" data-date="2022 - Present">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content right">
+                    <div class="experience-card" data-aos="fade-left">
+                        <div class="card-header">
+                            <h3>Software Development Engineer (SDE - 2)</h3>
+                            <div class="company-info">
+                                <span class="company">Micron</span>
+                                <span class="role-details">
+                                    <span class="location">Hyderabad, India</span>
+                                    <span class="duration">2022 - Present</span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="achievements">
+                            <li>
+                                <span class="achievement-title">AI Integration Lead</span>
+                                <p>Designed and developed Angular and .NET-based web applications with AI-driven enhancements</p>
+                                <div class="achievement-metrics">
+                                    <span class="metric">
+                                        <i class="metric-icon">📈</i>
+                                        50% Efficiency Improvement
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="achievement-title">Innovation Champion</span>
+                                <p>Spearheaded internal initiatives integrating Azure OpenAI and GitHub Copilot</p>
+                                <div class="achievement-metrics">
+                                    <span class="metric">
+                                        <i class="metric-icon">⚡</i>
+                                        30% Productivity Boost
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="achievement-title">AI Assistant Development</span>
+                                <p>Developed Gen AI internal assistant using Azure OpenAI and prompt templates</p>
+                                <div class="achievement-metrics">
+                                    <span class="metric">
+                                        <i class="metric-icon">🎯</i>
+                                        Reduced Response Time by 70%
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="technologies-used">
+                            <h4>Key Technologies</h4>
+                            <div class="tech-tags">
+                                <span>Azure OpenAI</span>
+                                <span>Angular</span>
+                                <span>.NET Core</span>
+                                <span>Semantic Kernel</span>
+                                <span>RAG</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item" data-date="2021">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content left">
+                    <div class="experience-card" data-aos="fade-right">
+                        <div class="card-header">
+                            <h3>Full Stack Developer Intern</h3>
+                            <div class="company-info">
+                                <span class="company">Wipro</span>
+                                <span class="role-details">
+                                    <span class="location">Hyderabad, India</span>
+                                    <span class="duration">2021 (6 months)</span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="achievements">
+                            <li>
+                                <span class="achievement-title">Full Stack Development</span>
+                                <p>Developed responsive web applications using Angular and Spring Boot, implementing modern design patterns and best practices.</p>
+                                <div class="achievement-metrics">
+                                    <span class="metric">
+                                        <i class="metric-icon">💻</i>
+                                        Delivered 3 Major Features
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="achievement-title">Database Optimization</span>
+                                <p>Optimized database queries and implemented caching strategies to improve application performance</p>
+                                <div class="achievement-metrics">
+                                    <span class="metric">
+                                        <i class="metric-icon">⚡</i>
+                                        40% Performance Boost
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="achievement-title">Team Collaboration</span>
+                                <p>Worked in an Agile team environment, participating in daily stand-ups and sprint planning sessions</p>
+                                <div class="achievement-metrics">
+                                    <span class="metric">
+                                        <i class="metric-icon">👥</i>
+                                        Cross-functional Team of 8
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="technologies-used">
+                            <h4>Key Technologies</h4>
+                            <div class="tech-tags">
+                                <span>Angular</span>
+                                <span>Spring Boot</span>
+                                <span>MySQL</span>
+                                <span>REST APIs</span>
+                                <span>Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects" data-aos="fade-up">
+        <h2 class="section-title">Gen AI Projects</h2>
+        <div class="project-card">
+            <div class="project-content">
+                <h3>AI Chat Assistance</h3>
+                <div class="project-header">
+                    <div class="tech-stack">
+                        <span>Azure Semantic Kernel</span>
+                        <span>Angular</span>
+                        <span>RAG</span>
+                        <span>.NET</span>
+                    </div>
+                    <div class="project-links">
+                        <button class="view-code-btn" data-project="chat-assistant">View Code</button>
+                        <button class="view-arch-btn" data-project="chat-assistant">View Architecture</button>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Developed proof-of-concept Gen AI tools using prompt engineering and RAG patterns.
+                    Collaborated with cross-functional teams to architect AI-powered components, reducing
+                    time to retrieve internal knowledge by 50%.
+                </p>
+                <div class="project-details" id="chat-assistant-details">
+                    <div class="code-preview">
+                        <div class="code-tabs">
+                            <button class="tab-btn active" data-tab="semantic-kernel">Semantic Kernel</button>
+                            <button class="tab-btn" data-tab="rag-implementation">RAG Implementation</button>
+                        </div>
+                        <pre class="code-block" data-code="semantic-kernel">
+// Initialize Semantic Kernel
+var kernel = Kernel.Builder
+    .WithAzureChatCompletionService(
+        deploymentName: "gpt-35-turbo",
+        endpoint: configuration["OpenAI:Endpoint"],
+        apiKey: configuration["OpenAI:ApiKey"])
+    .Build();
+
+// Create chat context
+var context = new ChatHistory();
+context.AddSystemMessage("You are a helpful AI assistant.");
+                        </pre>
+                        <pre class="code-block hidden" data-code="rag-implementation">
+// RAG Implementation
+public async Task<string> GetContextualResponse(
+    string query, 
+    IEnumerable<Document> documents)
+{
+    var embeddings = await GetEmbeddings(query);
+    var relevantDocs = await SearchSimilarDocuments(
+        embeddings, 
+        documents);
+    
+    return await GenerateResponse(query, relevantDocs);
+}</pre>
+                    </div>
+                    <div class="architecture-diagram hidden">
+                        <div class="diagram-container">
+                            <svg id="chat-assistant-arch" width="100%" height="400"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-content">
+                <h3>MACD Application</h3>
+                <div class="project-header">
+                    <div class="tech-stack">
+                        <span>Angular</span>
+                        <span>.NET Core</span>
+                        <span>Azure</span>
+                    </div>
+                    <div class="project-links">
+                        <button class="view-code-btn" data-project="macd">View Code</button>
+                        <button class="view-arch-btn" data-project="macd">View Architecture</button>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Led development of MACD application for automated lot and wafer attribute tagging.
+                    Achieved 30% improvement in production streamlining and reduced containment time
+                    from 56 hours to 2 hours.
+                </p>
+                <div class="project-details" id="macd-details">
+                    <div class="code-preview">
+                        <div class="code-tabs">
+                            <button class="tab-btn active" data-tab="angular-service">Angular Service</button>
+                            <button class="tab-btn" data-tab="dotnet-api">.NET API</button>
+                        </div>
+                        <pre class="code-block" data-code="angular-service">
+@Injectable({
+  providedIn: 'root'
+})
+export class MacdService {
+  constructor(private http: HttpClient) {}
+
+  async processLotAttributes(lotData: LotData): Promise<void> {
+    const result = await this.http
+      .post('/api/lots/process', lotData)
+      .toPromise();
+    
+    return this.handleResponse(result);
+  }
+}</pre>
+                        <pre class="code-block hidden" data-code="dotnet-api">
+[ApiController]
+[Route("api/[controller]")]
+public class LotsController : ControllerBase
+{
+    private readonly ILotProcessor _processor;
+    
+    [HttpPost("process")]
+    public async Task<IActionResult> ProcessLot(
+        [FromBody] LotData lotData)
+    {
+        var result = await _processor
+            .ProcessLotAttributes(lotData);
+        
+        return Ok(result);
+    }
+}</pre>
+                    </div>
+                    <div class="architecture-diagram hidden">
+                        <div class="diagram-container">
+                            <svg id="macd-arch" width="100%" height="400"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills" data-aos="fade-up">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="skills-3d-container">
+                <div class="skills-sphere" id="skills-sphere"></div>
+                <div class="skill-detail" id="skill-detail">
+                    <h3>Hover over a skill to learn more</h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="skills-list">
+                <div class="skill-category">
+                    <h3>Gen AI & Machine Learning</h3>
+                    <div class="skill-tags" data-category="ai">
+                        <span class="skill-tag" data-info="Expert in Azure OpenAI services and API integration">Azure OpenAI</span>
+                        <span class="skill-tag" data-info="Building AI applications with Semantic Kernel framework">Semantic Kernel</span>
+                        <span class="skill-tag" data-info="Implementing Retrieval Augmented Generation patterns">RAG</span>
+                        <span class="skill-tag" data-info="Working with Large Language Models and fine-tuning">LLM</span>
+                        <span class="skill-tag" data-info="Creating effective prompts for AI models">Prompt Engineering</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend & Frontend</h3>
+                    <div class="skill-tags" data-category="dev">
+                        <span class="skill-tag" data-info="Building scalable backend services with .NET Core">.NET Core</span>
+                        <span class="skill-tag" data-info="Creating modern web applications with Angular">Angular</span>
+                        <span class="skill-tag" data-info="Developing enterprise applications in C#">C#</span>
+                        <span class="skill-tag" data-info="Frontend development with JavaScript">JavaScript</span>
+                        <span class="skill-tag" data-info="Type-safe development with TypeScript">TypeScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-tags" data-category="cloud">
+                        <span class="skill-tag" data-info="Cloud solutions and services on Azure">Azure</span>
+                        <span class="skill-tag" data-info="AWS cloud infrastructure and services">AWS</span>
+                        <span class="skill-tag" data-info="Implementing continuous integration and deployment">CI/CD</span>
+                        <span class="skill-tag" data-info="Containerization and orchestration with Docker">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications" data-aos="fade-up">
+        <h2 class="section-title">Professional Certifications</h2>
+        <div class="certifications-container single-row">
+            <div class="certification-card compact" data-aos="fade-up">
+                <div class="certification-badge">
+                    <img src="assets/images/azure-fundamentals.png" alt="Microsoft Azure Fundamentals Badge">
+                </div>
+                <div class="certification-content">
+                    <h3>Microsoft Azure Fundamentals (AZ-900)</h3>
+                    <p>Validated expertise in cloud concepts, Azure services, and workloads.</p>
+                    <div class="certification-meta">
+                        <span class="issuer">
+                            <i class="fas fa-certificate"></i> Microsoft
+                        </span>
+                        <a href="https://www.credly.com/badges/8ae06d7b-134c-4f2c-81f8-28dfad3a8447" class="verify-btn" target="_blank">Verify</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-card compact" data-aos="fade-up">
+                <div class="certification-badge">
+                    <img src="assets/images/azure-ai-fundamentals.png" alt="Microsoft Azure AI Fundamentals Badge">
+                </div>
+                <div class="certification-content">
+                    <h3>Azure AI Fundamentals (AI-900)</h3>
+                    <p>Expertise in machine learning and Azure AI services.</p>
+                    <div class="certification-meta">
+                        <span class="issuer">
+                            <i class="fas fa-certificate"></i> Microsoft
+                        </span>
+                        <a href="https://learn.microsoft.com/api/credentials/share/en-us/SravanArimadla-0759/ED92DFCE6352E155?sharingId=5500CA4EB406A42A" class="verify-btn" target="_blank">Verify</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-card compact" data-aos="fade-up">
+                <div class="certification-badge">
+                    <img src="assets/images/aws-ai-practitioner.png" alt="AWS AI Practitioner Badge">
+                </div>
+                <div class="certification-content">
+                    <h3>AWS AI Practitioner</h3>
+                    <p>Proficiency in AWS AI/ML services and solutions.</p>
+                    <div class="certification-meta">
+                        <span class="issuer">
+                            <i class="fas fa-certificate"></i> AWS
+                        </span>
+                        <a href="https://www.credly.com/badges/c5f4e6e7-842d-4a07-b96a-f10fbba70108" class="verify-btn" target="_blank">Verify</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-card compact" data-aos="fade-up">
+                <div class="certification-badge">
+                    <img src="assets/images/udemy.png" alt="Udemy Full Stack Development Badge">
+                </div>
+                <div class="certification-content">
+                    <h3>Full Stack Development</h3>
+                    <p>Modern full-stack development with Angular and .NET Core.</p>
+                    <div class="certification-meta">
+                        <span class="issuer">
+                            <i class="fas fa-certificate"></i> Udemy
+                        </span>
+                        <a href="#" class="verify-btn" target="_blank">Verify</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" data-aos="fade-up">
+        <h2 class="section-title">Let's Create a New Reality</h2>
+        <p class="contact-message">
+            I am actively exploring new SDE-II opportunities in the Generative AI space and would be
+            delighted to discuss how my skills can bring value to your team.
+        </p>
+        <a href="https://topmate.io/sravan_arimadla10" class="btn contact-btn">Get in Touch</a>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

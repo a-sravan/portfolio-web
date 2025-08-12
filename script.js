@@ -1,96 +1,3 @@
-// Neural Network Background
-class NeuralNetwork {
-    constructor() {
-        this.canvas = document.getElementById('neural-network');
-        this.ctx = this.canvas.getContext('2d');
-        this.nodes = [];
-        this.connections = [];
-        this.animationFrame = null;
-        this.resize();
-        this.init();
-        
-        window.addEventListener('resize', () => this.resize());
-    }
-
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        this.init();
-    }
-
-    init() {
-        this.nodes = [];
-        this.connections = [];
-        
-        // Create nodes
-        for(let i = 0; i < 50; i++) {
-            this.nodes.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5
-            });
-        }
-
-        this.animate();
-    }
-
-    drawNode(x, y) {
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, 2, 0, Math.PI * 2);
-        this.ctx.fillStyle = 'rgba(6, 182, 212, 0.6)';
-        this.ctx.fill();
-    }
-
-    drawConnection(x1, y1, x2, y2, distance) {
-        const alpha = 1 - (distance / 150);
-        if(alpha > 0) {
-            this.ctx.beginPath();
-            this.ctx.moveTo(x1, y1);
-            this.ctx.lineTo(x2, y2);
-            this.ctx.strokeStyle = `rgba(6, 182, 212, ${alpha * 0.2})`;
-            this.ctx.stroke();
-        }
-    }
-
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        // Update nodes
-        this.nodes.forEach(node => {
-            node.x += node.vx;
-            node.y += node.vy;
-
-            if(node.x < 0 || node.x > this.canvas.width) node.vx *= -1;
-            if(node.y < 0 || node.y > this.canvas.height) node.vy *= -1;
-
-            this.drawNode(node.x, node.y);
-        });
-
-        // Draw connections
-        for(let i = 0; i < this.nodes.length; i++) {
-            for(let j = i + 1; j < this.nodes.length; j++) {
-                const dx = this.nodes[i].x - this.nodes[j].x;
-                const dy = this.nodes[i].y - this.nodes[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if(distance < 150) {
-                    this.drawConnection(
-                        this.nodes[i].x, this.nodes[i].y,
-                        this.nodes[j].x, this.nodes[j].y,
-                        distance
-                    );
-                }
-            }
-        }
-
-        this.animationFrame = requestAnimationFrame(() => this.animate());
-    }
-}
-
-// Initialize Neural Network
-const neuralNetwork = new NeuralNetwork();
-
 // Initialize AOS (Animate On Scroll)
 AOS.init({
     duration: 1000,
@@ -98,7 +5,6 @@ AOS.init({
     offset: 200
 });
 
-// Chat Assistant Functionality
 // Theme Management
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -134,95 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
     }
-    const chatToggle = document.querySelector('.chat-toggle');
-    const chatContainer = document.querySelector('.chat-container');
-    const closeChat = document.querySelector('.close-chat');
-    const chatInput = document.querySelector('.chat-input input');
-    const sendMessage = document.querySelector('.send-message');
-    const chatMessages = document.querySelector('.chat-messages');
-    const quickActions = document.querySelectorAll('.action-btn');
-
-    // Toggle chat container
-    chatToggle.addEventListener('click', () => {
-        chatContainer.classList.toggle('active');
-        if (chatContainer.classList.contains('active')) {
-            chatInput.focus();
-        }
-    });
-
-    closeChat.addEventListener('click', () => {
-        chatContainer.classList.remove('active');
-    });
-
-    // Send message function
-    function sendUserMessage(message) {
-        if (!message.trim()) return;
-
-        // Add user message
-        const userMessageHTML = `
-            <div class="message user">
-                <div class="message-content">
-                    <p>${message}</p>
-                </div>
-            </div>
-        `;
-        chatMessages.insertAdjacentHTML('beforeend', userMessageHTML);
-
-        // Clear input
-        chatInput.value = '';
-
-        // Simulate bot response
-        setTimeout(() => {
-            const botResponse = getBotResponse(message);
-            const botMessageHTML = `
-                <div class="message bot">
-                    <div class="message-content">
-                        <p>${botResponse}</p>
-                    </div>
-                </div>
-            `;
-            chatMessages.insertAdjacentHTML('beforeend', botMessageHTML);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
-    }
-
-    // Simple bot response logic
-    function getBotResponse(message) {
-        message = message.toLowerCase();
-        
-        if (message.includes('experience') || message.includes('work')) {
-            return "Sravan is currently working as an SDE-II at Micron Technology, specializing in Gen AI and Full Stack Development. He has 3.6 years of experience in developing AI-powered applications.";
-        } else if (message.includes('skills') || message.includes('technology')) {
-            return "Sravan's key skills include Azure OpenAI, Semantic Kernel, RAG, Angular, .NET Core, and various cloud technologies. He's particularly strong in AI integration and full-stack development.";
-        } else if (message.includes('project')) {
-            return "Check out Sravan's latest project - an AI Chat Assistant using Azure OpenAI and Semantic Kernel. He's also developed a MACD application that improved production efficiency by 30%.";
-        } else if (message.includes('contact') || message.includes('reach')) {
-            return "You can reach Sravan through his Topmate profile for professional discussions, or connect with him on LinkedIn. Would you like me to share the links?";
-        } else if (message.includes('certification') || message.includes('qualified')) {
-            return "Sravan holds several professional certifications including Microsoft Azure Fundamentals (AZ-900), Azure AI Fundamentals (AI-900), and AWS AI Practitioner certification.";
-        } else {
-            return "I'd be happy to tell you more about Sravan's experience, skills, or projects. What would you like to know?";
-        }
-    }
-
-    // Send message on button click or enter key
-    sendMessage.addEventListener('click', () => {
-        sendUserMessage(chatInput.value);
-    });
-
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendUserMessage(chatInput.value);
-        }
-    });
-
-    // Quick action buttons
-    quickActions.forEach(button => {
-        button.addEventListener('click', () => {
-            const query = button.getAttribute('data-query');
-            sendUserMessage(query);
-        });
-    });
 });
 
 // Particle.js Configuration
@@ -307,13 +124,6 @@ particlesJS('particles-js', {
     retina_detect: true
 });
 
-// Cursor Light Effect
-document.addEventListener('mousemove', (e) => {
-    const cursor = document.querySelector('.cursor-light');
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-
 // Smooth Scroll for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -327,21 +137,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// Animated Gradient Text
-const gradientText = document.querySelector('.gradient-text');
-let gradientDegree = 0;
-
-function animateGradient() {
-    gradientDegree = (gradientDegree + 1) % 360;
-    gradientText.style.background = `linear-gradient(${gradientDegree}deg, #06b6d4, #d946ef)`;
-    gradientText.style.webkitBackgroundClip = 'text';
-    gradientText.style.backgroundClip = 'text';
-    gradientText.style.webkitTextFillColor = 'transparent';
-    requestAnimationFrame(animateGradient);
-}
-
-animateGradient();
 
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

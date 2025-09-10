@@ -17,24 +17,7 @@ async function loadSystemPrompt() {
   } catch (e) {
     PROMPT_SOURCE = "fallback";
     console.warn('Using fallback system prompt. Could not load prompts/prompt.txt:', e);
-  } finally {
-    showPromptSourceBadge();
-    console.log('[Prompt source]', PROMPT_SOURCE, '— first 80 chars:', SYSTEM_PROMPT.slice(0, 80));
   }
-}
-
-function showPromptSourceBadge() {
-  const header = document.querySelector('.chat-header');
-  if (!header) return;
-  let badge = document.getElementById('prompt-source-badge');
-  if (!badge) {
-    badge = document.createElement('span');
-    badge.id = 'prompt-source-badge';
-    badge.style.cssText =
-      'margin-left:auto;font-size:11px;background:#333;color:#fff;padding:2px 6px;border-radius:12px;opacity:.75;';
-    header.appendChild(badge);
-  }
-  badge.textContent = PROMPT_SOURCE === 'file' ? 'prompt: file' : 'prompt: fallback';
 }
 
 // expose a manual reload for quick testing in DevTools
@@ -51,35 +34,61 @@ document.addEventListener('DOMContentLoaded', async function () {
   const sendMessage = document.querySelector('.send-message');
   const chatMessages = document.querySelector('.chat-messages');
   const quickActions = document.querySelectorAll('.action-btn');
+  const chatGif = document.querySelector('.chat-gif');
   if (!chatToggle) return;
 
   chatToggle.addEventListener('click', () => {
     chatContainer.classList.toggle('active');
-    if (chatContainer.classList.contains('active')) chatInput.focus();
+    const isActive = chatContainer.classList.contains('active');
+    // Hide GIF when chat opens, show when chat closes
+    if (chatGif) {
+      chatGif.style.display = isActive ? 'none' : 'block';
+    }
+    if (isActive) chatInput.focus();
   });
-  closeChat.addEventListener('click', () => chatContainer.classList.remove('active'));
+  
+  closeChat.addEventListener('click', () => {
+    chatContainer.classList.remove('active');
+    // Show GIF when chat closes
+    if (chatGif) {
+      chatGif.style.display = 'block';
+    }
+  });
 
   async function sendUserMessage(message) {
     if (!message.trim()) return;
+
+    // Play send sound
+    playSound('send');
 
     // user bubble
     chatMessages.insertAdjacentHTML('beforeend', `
       <div class="message user"><div class="message-content"><p>${escapeHtml(message)}</p></div></div>
     `);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    scrollToBottom();
     chatInput.value = '';
 
-    // bot bubble
-    const bot = document.createElement('div');
-    bot.className = 'message bot';
-    bot.innerHTML = `<div class="message-content"><p>…</p></div>`;
-    chatMessages.appendChild(bot);
-    const botText = bot.querySelector('p');
+    // Show typing indicator
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'message bot typing-indicator';
+    typingIndicator.innerHTML = `
+      <div class="message-content">
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    `;
+    chatMessages.appendChild(typingIndicator);
+    scrollToBottom();
 
     // ---------- Gemini call ----------
-    const API_KEY = 'AIzaSyCmuvMrKoBcPL-rnqg-t-Tfw39MMbpxOYw'; // this  is API key
+    const API_KEY = 'AIzaSyCmuvMrKoBcPL-rnqg-t-Tfw39MMbpxOYw'; // this is API key
     if (!API_KEY || API_KEY.includes('REPLACE') || API_KEY.includes('YOUR')) {
-      botText.textContent = "API key is missing. Add your Gemini key in chat.js.";
+      // Remove typing indicator and show error
+      typingIndicator.remove();
+      addBotMessage("API key is missing. Add your Gemini key in chat.js.");
       return;
     }
 
@@ -97,12 +106,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         }),
       });
 
+      // Remove typing indicator
+      typingIndicator.remove();
+
       // Show server errors clearly
       if (!response.ok) {
         const errText = await response.text().catch(() => '');
         console.error('Gemini API Error:', response.status, errText);
-        botText.textContent =
-          `API error ${response.status}. Check console for details (CORS, referrer, quota, or key/domain).`;
+        addBotMessage(`API error ${response.status}. Check console for details (CORS, referrer, quota, or key/domain).`);
         return;
       }
 
@@ -112,19 +123,91 @@ document.addEventListener('DOMContentLoaded', async function () {
       const blocked = data?.promptFeedback?.blockReason;
       if (blocked) {
         console.warn('Response blocked:', blocked, data?.promptFeedback);
-        botText.textContent = "I couldn't answer that one. Try rephrasing!";
+        addBotMessage("I couldn't answer that one. Try rephrasing!");
         return;
       }
 
       const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      botText.textContent = text || "No response";
+      if (text) {
+        // Play receive sound and add message with typing effect
+        playSound('receive');
+        addBotMessageWithTyping(text);
+      } else {
+        addBotMessage("No response");
+      }
     } catch (err) {
+      // Remove typing indicator
+      typingIndicator.remove();
       console.error('Fetch failed:', err);
-      botText.textContent = "Sorry, I'm having trouble connecting to the AI. Please try again later.";
+      addBotMessage("Sorry, I'm having trouble connecting to the AI. Please try again later.");
     }
     // ----------------------------------
+  }
 
+  // Function to add bot message with typing animation
+  function addBotMessageWithTyping(text) {
+    const botMessage = document.createElement('div');
+    botMessage.className = 'message bot';
+    botMessage.innerHTML = `<div class="message-content"><p></p></div>`;
+    chatMessages.appendChild(botMessage);
+
+    const messageP = botMessage.querySelector('p');
+    let index = 0;
+    
+    function typeWriter() {
+      if (index < text.length) {
+        messageP.textContent += text.charAt(index);
+        index++;
+        scrollToBottom();
+        setTimeout(typeWriter, 10);
+      }
+    }
+    
+    setTimeout(typeWriter, 300);
+  }
+
+  // Function to add bot message without typing effect
+  function addBotMessage(text) {
+    const botMessage = document.createElement('div');
+    botMessage.className = 'message bot';
+    botMessage.innerHTML = `<div class="message-content"><p>${text}</p></div>`;
+    chatMessages.appendChild(botMessage);
+    scrollToBottom();
+  }
+
+  // Function to scroll to bottom
+  function scrollToBottom() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Function to play simple sounds
+  function playSound(type) {
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      if (type === 'send') {
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
+      } else if (type === 'receive') {
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.15);
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.15);
+      }
+    } catch (error) {
+      // Silently fail if audio not available
+    }
   }
 
   function escapeHtml(unsafe) {
@@ -141,9 +224,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   quickActions.forEach(btn => {
     btn.addEventListener('click', () => {
       const q = btn.getAttribute('data-query');
-      chatMessages.insertAdjacentHTML('beforeend',
-        `<div class="message user"><div class="message-content"><p>${escapeHtml(q)}</p></div></div>`);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
       sendUserMessage(q);
     });
   });

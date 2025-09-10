@@ -834,16 +834,21 @@ section {
 }
 
 .chat-toggle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2a2a72 0%, #009ffd 74%);
+    width: 200px;
+    height: 200px;
+    background: transparent;
     border: none;
-    color: white;
-    font-size: 24px;
+    padding: 0;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.chat-toggle .chat-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .chat-toggle:hover {
@@ -864,10 +869,15 @@ section {
     flex-direction: column;
     overflow: hidden;
     border: 1px solid #333;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
 }
 
 .chat-container.active {
     display: flex;
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .chat-header {
@@ -894,6 +904,11 @@ section {
     cursor: pointer;
     font-size: 18px;
     padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.close-chat:hover {
+    transform: scale(1.1);
 }
 
 .chat-messages {
@@ -903,11 +918,24 @@ section {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    scroll-behavior: smooth;
 }
 
 .message {
     display: flex;
     margin-bottom: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .message.user {
@@ -920,10 +948,64 @@ section {
     border-radius: 15px;
     background: #333;
     color: white;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.message-content:hover {
+    transform: scale(1.02);
 }
 
 .message.user .message-content {
     background: #0066cc;
+}
+
+.message.bot .message-content {
+    background: #333;
+}
+
+/* Typing indicator animation */
+.typing-indicator .message-content {
+    background: #444;
+    padding: 15px 20px;
+}
+
+.typing-dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.typing-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #888;
+    display: inline-block;
+    animation: typing 1.5s infinite;
+}
+
+.typing-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
 }
 
 .quick-actions {
@@ -941,11 +1023,17 @@ section {
     border-radius: 15px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    transform: scale(1);
 }
 
 .action-btn:hover {
     background: #009ffd;
+    transform: scale(1.05);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
 }
 
 .chat-input {
@@ -964,11 +1052,13 @@ section {
     background: #1a1a1a;
     color: white;
     font-size: 0.95rem;
+    transition: all 0.3s ease;
 }
 
 .chat-input input:focus {
     outline: none;
     border-color: #009ffd;
+    box-shadow: 0 0 10px rgba(0, 159, 253, 0.3);
 }
 
 .send-message {
@@ -982,11 +1072,17 @@ section {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    transform: scale(1);
 }
 
 .send-message:hover {
     background: #0052a3;
+    transform: scale(1.1);
+}
+
+.send-message:active {
+    transform: scale(0.9);
 }
 
 .message p {

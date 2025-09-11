@@ -206,49 +206,31 @@ function initializeTimeline() {
 window.addEventListener('load', initializeTimeline);
 
 // Project Details Interaction
-document.querySelectorAll('.view-code-btn, .view-arch-btn').forEach(button => {
+document.querySelectorAll('.view-arch-btn').forEach(button => {
     button.addEventListener('click', (e) => {
         const projectId = e.target.dataset.project;
         const detailsSection = document.getElementById(`${projectId}-details`);
-        const isCodeBtn = e.target.classList.contains('view-code-btn');
         
         // Toggle active state
         const wasActive = detailsSection.classList.contains('active');
+        
+        // Close all other project details
         document.querySelectorAll('.project-details').forEach(section => {
             section.classList.remove('active');
         });
         
         if (!wasActive) {
             detailsSection.classList.add('active');
-            const codePreview = detailsSection.querySelector('.code-preview');
             const archDiagram = detailsSection.querySelector('.architecture-diagram');
             
-            codePreview.classList.toggle('hidden', !isCodeBtn);
-            archDiagram.classList.toggle('hidden', isCodeBtn);
+            // Show architecture diagram
+            archDiagram.classList.remove('hidden');
             
-            if (!isCodeBtn) {
+            // For projects that need SVG generation
+            if (projectId === 'macd') {
                 initArchitectureDiagram(projectId);
             }
         }
-    });
-});
-
-// Code Tab Switching
-document.querySelectorAll('.tab-btn').forEach(tab => {
-    tab.addEventListener('click', (e) => {
-        const tabContainer = e.target.closest('.code-tabs');
-        const codeContainer = e.target.closest('.code-preview');
-        const targetTab = e.target.dataset.tab;
-        
-        // Update active tab
-        tabContainer.querySelectorAll('.tab-btn').forEach(t => {
-            t.classList.toggle('active', t === e.target);
-        });
-        
-        // Show selected code
-        codeContainer.querySelectorAll('.code-block').forEach(block => {
-            block.classList.toggle('hidden', block.dataset.code !== targetTab);
-        });
     });
 });
 
